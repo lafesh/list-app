@@ -1,0 +1,7 @@
+<h3>Hi <%= @user.first_name %>! Here are all your lists:</h3>
+
+<ul>
+    <% @lists.each do |list| %>
+        <li><%= list.list_title %></li>
+    <% end %>
+</ul>
