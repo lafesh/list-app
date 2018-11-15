@@ -15,12 +15,12 @@ class UsersController < ApplicationController
     end
 
     get '/login' do
-        erb :'users/login' unless logged_in?
-        redirect '/lists'
+        erb :'users/login' 
     end
 
     post '/login' do
-        user = User.find_by_id(params[:id])
+        
+        user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
             redirect '/lists'

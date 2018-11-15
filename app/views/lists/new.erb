@@ -2,7 +2,10 @@
 
 <form action="/lists" method="post">
     List Title: <input type="text" name="list[list_title]">
-    List Item(s): <input type="text" name="list[list_item][]">
+    List Item(s): <input type="text" name="list[list_item][]" id="items">
     Finished: <input type="checkbox" name="list[finished]">
+    <input type="button" value=" Add Entry " id="add">
     <input type="submit" value=" Create List ">
 </form>
+
+<script src="custom.js"></script>
