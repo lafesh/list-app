@@ -1,7 +1,14 @@
-<h3>Hi <%= @user.first_name %>! Here are all your lists:</h3>
+<h3>Hi <%= @user.first_name.capitalize %>! Here are all your lists:</h3>
 
 <ul>
-    <% @lists.each do |list| %>
-        <li><%= list.list_title %></li>
+    <% @user.lists.each do |list| %>
+        <li><a href="/lists/<%= list.id %>"><%= list.list_title %></a></li>
+        <a href="/lists/<%= list.id %>/edit">Edit List</a>
+        <form action="/lists/id/delete" method="post">
+        <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete List" id="delete">
+        </form>
     <% end %>
+
+    <a href="/logout">Log Out</a>
 </ul>

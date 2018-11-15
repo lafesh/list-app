@@ -1,14 +1,13 @@
-class UsersController < Sinatra::Base
+class UsersController < ApplicationController
     get '/signup' do
         erb :'users/signup'
     end
 
     post '/signup' do
-        @user = User.new(params)
-        if @user.save
-            @lists = User.lists.all
+        user = User.new(params)
+        if user.save
             session[:user_id] = user.id 
-            erb :homepage 
+            redirect '/lists' 
         else
             flash[:message] = "Please fill out all the fields"
             redirect '/signup'
@@ -16,17 +15,25 @@ class UsersController < Sinatra::Base
     end
 
     get '/login' do
-        erb :'users/login'
+        erb :'users/login' unless logged_in?
+        redirect '/lists'
     end
 
     post '/login' do
         @user = User.find_by_id(params[:id])
         if @user && @user.authenticate(params[:password])
-            @lists = User.lists.all
-            erb :homepage
+            session[:user_id] = @user.id
+            redirect '/lists'
         else 
             flash[:message] = "Please fill out all the fields"
             redirect '/login'
         end
+    end
+
+    get '/logout' do
+        redirect '/login' unless logged_in?
+            session.clear 
+            flash[:message] = "Thank you for visiting My Lists. Have a wonderful day!"
+            redirect '/'     
     end
 end
