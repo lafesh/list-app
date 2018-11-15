@@ -1,15 +1,18 @@
-<h3>Hi <%= @user.first_name.capitalize %>! Here are all your lists:</h3>
+<h2>Hi <%= @user.first_name.capitalize %>! Here are all your lists:</h2>
 <a href="/lists/new">Create a new List</a>
-<ul>
-    <% @user.lists.each do |list| %>
-        <li><a href="/lists/<%= list.id %>"><%= list.list_title %></a></li>
-        <a href="/lists/<%= list.id %>/edit">Edit List</a>
-        <form action="/lists/id/delete" method="post">
+
+<% @user.lists.each do |list| %>
+    <h3><a href="/lists/<%= list.id %>"><%= list.list_title %></a></h3>
+    
+    <a href="/lists/<%= list.id %>/edit">Edit List</a> <!-- make into button? -->
+    <form action="/lists/<%= list.id %>/delete" method="post">
         <input type="hidden" id="hidden" name="_method" value="delete">
         <input type="submit" value="Delete List" id="delete">
-        </form>
-    <% end %>
-</ul>
+    </form>
+<% end %>
+
+<br>
+
 <a href="/lists/new">Create a new List</a>
 <br>
 <a href="/logout">Log Out</a>

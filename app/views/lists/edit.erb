@@ -1,0 +1,9 @@
+<h2>Update <%= @list.list_title %></h2>
+
+<form action="/lists/<%= @list.id %>" method="post">
+    <input type="hidden" name="_method" id="hidden" value="patch">
+    List Title: <input type="text" name="list[list_title]" value="<%= @list.list_title %>">
+    List Item(s): <input type="text" name="list[list_item][]" value="<%= @list.list_item %>">
+    Finished: <input type="checkbox" name="list[finished]" value="<%= @list.finished %>" <%= @list.finished ? 'checked' : '' %> >
+    <input type="submit" value=" Update List ">
+</form>

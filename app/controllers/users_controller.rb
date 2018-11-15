@@ -4,10 +4,10 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-        user = User.new(params)
-        if user.save
-            session[:user_id] = user.id 
-            redirect '/lists' 
+        @user = User.new(params)
+        if @user.save
+            session[:user_id] = @user.id 
+            redirect '/lists'
         else
             flash[:message] = "Please fill out all the fields"
             redirect '/signup'
@@ -20,9 +20,9 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        @user = User.find_by_id(params[:id])
-        if @user && @user.authenticate(params[:password])
-            session[:user_id] = @user.id
+        user = User.find_by_id(params[:id])
+        if user && user.authenticate(params[:password])
+            session[:user_id] = user.id
             redirect '/lists'
         else 
             flash[:message] = "Please fill out all the fields"
@@ -31,9 +31,9 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-        redirect '/login' unless logged_in?
-            session.clear 
-            flash[:message] = "Thank you for visiting My Lists. Have a wonderful day!"
-            redirect '/'     
+        #should i make sure that its the user with the same session id?
+        session.clear 
+        flash[:message] = "Thank you for visiting My Lists. Have a wonderful day!"
+        redirect '/'     
     end
 end
