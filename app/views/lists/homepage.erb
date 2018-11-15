@@ -1,5 +1,5 @@
 <h3>Hi <%= @user.first_name.capitalize %>! Here are all your lists:</h3>
-
+<a href="/lists/new">Create a new List</a>
 <ul>
     <% @user.lists.each do |list| %>
         <li><a href="/lists/<%= list.id %>"><%= list.list_title %></a></li>
@@ -9,6 +9,7 @@
         <input type="submit" value="Delete List" id="delete">
         </form>
     <% end %>
-
-    <a href="/logout">Log Out</a>
 </ul>
+<a href="/lists/new">Create a new List</a>
+<br>
+<a href="/logout">Log Out</a>
