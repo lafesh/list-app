@@ -11,6 +11,7 @@ class ListsController < ApplicationController
     end
 
     post '/lists' do #make this less complicated
+        
         if params[:list][:list_title].empty? || params[:list][:list_item].empty?
             flash[:message] = "Please fill out all the fields available."
             redirect '/lists/new'
@@ -38,13 +39,13 @@ class ListsController < ApplicationController
     end
 
     patch '/lists/:id' do
-        
+        binding.pry
         redirect '/login' unless logged_in?
         list = List.find_by_id(params[:id])
         if list.user == current_user
             list.update(params[:list])
             list.save
-            redirect "/lists/#{list.id}"
+            redirect "/lists"
         else
             redirect "/lists/#{list.id}"
         end

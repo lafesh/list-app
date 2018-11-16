@@ -11,6 +11,6 @@
     <input type="hidden" name="_method" id="hidden" value="patch">
     List Title: <input type="text" name="list[list_title]" value="<%= @list.list_title %>">
     <div class="items">List Item(s): <input type="text" name="list[list_item][]" value="<%= @list.list_item %>"></div>
-    Finished: <input type="checkbox" name="list[finished]" value="<%= @list.finished %>" <%= @list.finished ? 'checked' : '' %> >
+    Finished: <input type="checkbox" name="list[finished]" <%= @list.finished ? 'checked' : '' %> >
     <input type="submit" value=" Update List ">
 </form>
