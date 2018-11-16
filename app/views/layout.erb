@@ -10,13 +10,24 @@
     <title>ListsApplication</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#add").click(function(e){
+          $(".items").append('<div>List Item(s): <input type="text" name="list[list_item][]">' + '<input type="button" value="delete" id="delete"></div>')
+        });
+        $(".items").on("click", "#delete", function(e){
+          e.preventDefault(); $(this).parent('div').remove();
+        });
+      });
+    </script>
 
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
     <div class="wrapper">
       <h1>My Lists - An Organizational Application</h1>
-      <br>
       <% flash.keys.each do |type| %>
         <div data-alert class="flash <%= type %> alert-box radius">
           <%= flash[type] %>
@@ -32,9 +43,10 @@
         <small><strong>Contact Info: <a href="mailto:ginafedder@yahoo.com">Email</a></strong></small>
       </footer>
     </div>
+
     
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="custom.js"></script>
+    
+
     <!--[if lt IE 7]>
       <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
       <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>

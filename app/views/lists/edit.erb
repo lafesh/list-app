@@ -1,9 +1,16 @@
+<div class="navbar">
+    <a href="/lists">My Lists</a>
+    <a href="/lists/new">Create New List</a>
+    <a href="/lists/all">All Lists</a>
+    <a href="/logout">Logout</a>
+</div>
+
 <h2>Update <%= @list.list_title %></h2>
 
 <form action="/lists/<%= @list.id %>" method="post">
     <input type="hidden" name="_method" id="hidden" value="patch">
     List Title: <input type="text" name="list[list_title]" value="<%= @list.list_title %>">
-    List Item(s): <input type="text" name="list[list_item][]" value="<%= @list.list_item %>">
+    <div class="items">List Item(s): <input type="text" name="list[list_item][]" value="<%= @list.list_item %>"></div>
     Finished: <input type="checkbox" name="list[finished]" value="<%= @list.finished %>" <%= @list.finished ? 'checked' : '' %> >
     <input type="submit" value=" Update List ">
 </form>

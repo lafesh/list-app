@@ -1,0 +1,21 @@
+<div class="navbar">
+    <a href="/lists">My Lists</a>
+    <a href="/lists/new">Create New List</a>
+    <a class="active" href="/lists/all">All Lists</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<h2>Here are all the lists currently available</h2>
+
+<% @lists.each do |list| %>
+    <% if list.user == current_user %>
+        <h3><a href="/lists/<%= list.id %>"><%= list.list_title %></a> by <%= list.user.first_name.capitalize %></h3>
+    <% else %>
+        <h3><%= list.list_title %> by <%= list.user.first_name.capitalize %></h3>
+    <% end %>
+    <p>Created on <%= list.updated_at.strftime("%A, %b %d, %Y") %></p> 
+    
+        <%= list.list_item %>
+        <p></p>
+    
+<% end %>

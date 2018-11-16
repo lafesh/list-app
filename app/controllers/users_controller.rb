@@ -24,9 +24,12 @@ class UsersController < ApplicationController
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
             redirect '/lists'
-        else 
-            flash[:message] = "Please fill out all the fields"
+        elsif params[:email].empty? || params[:password].empty?
+            flash[:message] = "Please fill out all the fields."
             redirect '/login'
+        else 
+            flash[:message] = "We could not find you in the database. Please Sign Up."
+            redirect '/signup'
         end
     end
 

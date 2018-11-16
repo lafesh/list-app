@@ -1,10 +1,17 @@
+<div class="navbar">
+    <a href="/lists">My Lists</a>
+    <a class="active" href="/lists/new">Create New List</a>
+    <a href="/lists/all">All Lists</a>
+    <a href="/logout">Logout</a>
+</div>
 <h2>Create your new list here</h2>
 
 <form action="/lists" method="post">
     List Title: <input type="text" name="list[list_title]">
-    List Item(s): <input type="text" name="list[list_item][]" id="items">
+    <div class="items">List Item(s): <input type="text" name="list[list_item]"></div>
     Finished: <input type="checkbox" name="list[finished]">
     <input type="button" value=" Add Entry " id="add">
     <input type="submit" value=" Create List ">
 </form>
+
 

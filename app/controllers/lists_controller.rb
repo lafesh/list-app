@@ -4,7 +4,7 @@ class ListsController < ApplicationController
         @user = current_user
         erb :'lists/homepage'
     end
-
+    
     get '/lists/new' do
         redirect '/login' unless logged_in?
         erb :'lists/new'
@@ -21,6 +21,11 @@ class ListsController < ApplicationController
             redirect '/lists'
         end
     end
+
+    get '/lists/all' do
+        @lists = List.all 
+        erb :'lists/all'
+    end 
 
     get '/lists/:id' do
         @list = List.find_by_id(params[:id])

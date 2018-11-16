@@ -1,13 +1,20 @@
+<div class="navbar">
+    <a class="active" href="/lists">My Lists</a>
+    <a href="/lists/new">Create New List</a>
+    <a href="/lists/all">All Lists</a>
+    <a href="/logout">Logout</a>
+</div>
+
 <h2>Hi <%= @user.first_name.capitalize %>! Here are all your lists:</h2>
-<a href="/lists/new">Create a new List</a>
 
 <% @user.lists.each do |list| %>
     <h3><a href="/lists/<%= list.id %>"><%= list.list_title %></a></h3>
     
-    <a href="/lists/<%= list.id %>/edit">Edit List</a> <!-- make into button? -->
+    <a href="/lists/<%= list.id %>/edit"><button class="button"> Edit List </button></a>
+
     <form action="/lists/<%= list.id %>/delete" method="post">
         <input type="hidden" id="hidden" name="_method" value="delete">
-        <input type="submit" value=" Delete List " id="delete">
+        <input type="submit" value="Delete List" id="delete">
     </form>
 <% end %>
 
