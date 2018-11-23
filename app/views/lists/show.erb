@@ -2,13 +2,16 @@
     <a href="/lists">My Lists</a>
     <a href="/lists/new">Create New List</a>
     <a href="/lists/all">All Lists</a>
+    <a href="/settings">Settings</a>
     <a href="/logout">Logout</a>
 </div>
 
 <h2><%= @list.list_title %></h2>
-<% @list.list_item.each do |list| %>
-    <ul><li><%= list %></li></ul>
-<% end %>
+<ul>
+    <% @list.list_items.each do |list| %>
+        <li><%= list.item %></li>
+    <% end %>
+</ul><br>
 
 List created on <%= @list.created_at.strftime("%A, %b %d, %Y") %> <br>
 <% if @list.updated_at != @list.created_at %>

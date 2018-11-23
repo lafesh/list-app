@@ -15,9 +15,9 @@
     <script>
       $(document).ready(function() {
         $("#add").click(function(e){
-          $(".items").append('<div>List Item(s): <input type="text" name="list[list_item][]">' + '<input type="button" value="delete" id="delete"></div>')
+          $(".items").append('<div>List Item: <input type="text" name="list[list_items][][item]">' + '<input type="button" value="delete" id="delete"></div>')
         });
-        $(".items").on("click", "#delete", function(e){
+        $(".item").on("click", "#delete", function(e){
           e.preventDefault(); $(this).parent('div').remove();
         });
       });
@@ -28,6 +28,7 @@
   <body>
     <div class="wrapper">
       <h1>My Lists - An Organizational Application</h1>
+
       <% flash.keys.each do |type| %>
         <div data-alert class="flash <%= type %> alert-box radius">
           <%= flash[type] %>

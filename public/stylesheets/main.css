@@ -147,6 +147,7 @@ a:hover {
 }
 
 .button {
+  margin: 0;
   padding: 3px 6px;
   background-color: orange;
 }

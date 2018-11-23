@@ -2,6 +2,7 @@
     <a href="/lists">My Lists</a>
     <a href="/lists/new">Create New List</a>
     <a class="active" href="/lists/all">All Lists</a>
+    <a href="/settings">Settings</a>
     <a href="/logout">Logout</a>
 </div>
 
@@ -14,8 +15,11 @@
         <h3><%= list.list_title %> by <%= list.user.first_name.capitalize %></h3>
     <% end %>
     <p>Created on <%= list.updated_at.strftime("%A, %b %d, %Y") %></p> 
-    
-        <%= list.list_item %>
+    <ul>
+    <% list.list_items.each do |i| %>
+        <li><%= i.item %></li>
+    <% end %>
+    </ul>
         <p></p>
     
 <% end %>

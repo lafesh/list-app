@@ -10,7 +10,11 @@
 <form action="/lists/<%= @list.id %>" method="post">
     <input type="hidden" name="_method" id="hidden" value="patch">
     List Title: <input type="text" name="list[list_title]" value="<%= @list.list_title %>">
-    <div class="items">List Item(s): <input type="text" name="list[list_item][]" value="<%= @list.list_item %>"></div>
-    Finished: <input type="checkbox" name="list[finished]" <%= @list.finished ? 'checked' : '' %> >
+    <div class="items">
+    <% @list.list_items.each do |list| %>
+        <div class="item"> List Item: <input type="text" name="list[list_items][][item]" value="<%= list.item %>"> <input type="button" value="delete" id="delete"><br></div>
+    <% end %>
+    </div>
+    <input type="button" value=" Add List Item " id="add">
     <input type="submit" value=" Update List ">
 </form>

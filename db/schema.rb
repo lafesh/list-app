@@ -11,12 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181114181727) do
+ActiveRecord::Schema.define(version: 20181116200013) do
+
+  create_table "list_items", force: :cascade do |t|
+    t.string  "item"
+    t.integer "list_id"
+  end
 
   create_table "lists", force: :cascade do |t|
     t.string   "list_title"
-    t.string   "list_item"
-    t.boolean  "finished"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

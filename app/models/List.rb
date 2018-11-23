@@ -1,4 +1,5 @@
 class List < ActiveRecord::Base
     belongs_to :user
-    validates :list_title, :list_item, presence: true
+    has_many :list_items
+    validates :list_title, presence: true #add finished
 end

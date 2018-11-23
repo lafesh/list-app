@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        
         user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
@@ -34,9 +33,18 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-        #should i make sure that its the user with the same session id?
         session.clear 
         flash[:message] = "Thank you for visiting My Lists. Have a wonderful day!"
         redirect '/'     
+    end
+    
+    get '/settings' do
+        erb :'users/settings'
+    end
+
+    get '/close' do
+        redirect '/login' unless logged_in?
+        User.delete(current_user)
+        redirect '/'
     end
 end

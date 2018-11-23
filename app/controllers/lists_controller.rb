@@ -10,15 +10,18 @@ class ListsController < ApplicationController
         erb :'lists/new'
     end
 
-    post '/lists' do #make this less complicated
-        
-        if params[:list][:list_title].empty? || params[:list][:list_item].empty?
+    post '/lists' do #make this less complicated 
+        if params[:list][:list_title].empty? || params[:list][:list_items].empty?
             flash[:message] = "Please fill out all the fields available."
             redirect '/lists/new'
         else
             user = current_user
-            user.lists.create(params[:list])
-            user.save
+            list = user.lists.create(list_title: params[:list][:list_title])
+            list.save
+            params[:list][:list_items].each do |item|
+                list.list_items.build(item)
+                list.save
+            end   
             redirect '/lists'
         end
     end
@@ -38,13 +41,22 @@ class ListsController < ApplicationController
         erb :'lists/edit'
     end
 
-    patch '/lists/:id' do
-        binding.pry
+    patch '/lists/:id' do  
+        #binding.pry
         redirect '/login' unless logged_in?
         list = List.find_by_id(params[:id])
         if list.user == current_user
-            list.update(params[:list])
+            list.update(list_title: params[:list][:list_title])
             list.save
+            list.list_items.each {|item| item.delete}
+            params[:list][:list_items].each do |item|
+                list.list_items.build(item)
+                list.save
+            end   
+            # list.list_items.each do |item|
+            #     item.update(item: params[:list_items][:item]) need to iterate through each item somehow
+            #     list.save
+            # end   
             redirect "/lists"
         else
             redirect "/lists/#{list.id}"
