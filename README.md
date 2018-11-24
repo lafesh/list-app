@@ -1,4 +1,4 @@
-#LISTS APPLICATION
+# LISTS APPLICATION
 
 Welcome to this application. It has been built so that the user can create an account and build, edit, delete lists. It is an organizational app that will help the user remember what things he has done, is currently doing or wants to do in the future. 
 

@@ -42,10 +42,4 @@ class UsersController < ApplicationController
     get '/settings' do
         erb :'users/settings'
     end
-
-    # get '/close' do
-    #     redirect '/login' unless logged_in?
-    #     User.delete(current_user)
-    #     redirect '/'
-    # end
 end
