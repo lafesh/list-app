@@ -19,4 +19,4 @@ Welcome to this application. It has been built so that the user can create an ac
     The application is available as open source under the terms of the MIT License.
 
 # Code of Conduct
-    Everyone interacting in the Lists Application project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the code of conduct.
+    This project is licensed under the MIT License - see the LICENSE.md file for details
