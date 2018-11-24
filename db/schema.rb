@@ -14,8 +14,10 @@
 ActiveRecord::Schema.define(version: 20181116200013) do
 
   create_table "list_items", force: :cascade do |t|
-    t.string  "item"
-    t.integer "list_id"
+    t.string   "item"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "list_id"
   end
 
   create_table "lists", force: :cascade do |t|

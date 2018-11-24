@@ -35,6 +35,7 @@ class ListsController < ApplicationController
     get '/lists/:id' do
         redirect '/login' unless logged_in?
         @list = List.find_by_id(params[:id])
+        #binding.pry
         erb :'lists/show'
     end
 
@@ -59,7 +60,7 @@ class ListsController < ApplicationController
             #     item.update(item: params[:list_items][:item]) need to iterate through each item somehow
             #     list.save
             # end   
-            redirect "/lists"
+            redirect "/lists/#{list.id}"
         else
             flash[:message] = "You need to be the Creator of this List to edit it"
             redirect "/lists/#{list.id}"
