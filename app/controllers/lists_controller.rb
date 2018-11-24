@@ -27,22 +27,24 @@ class ListsController < ApplicationController
     end
 
     get '/lists/all' do
-        @lists = List.all 
+        redirect '/login' unless logged_in?
+        @lists = List.all     
         erb :'lists/all'
     end 
 
     get '/lists/:id' do
+        redirect '/login' unless logged_in?
         @list = List.find_by_id(params[:id])
         erb :'lists/show'
     end
 
     get '/lists/:id/edit' do
+        redirect '/login' unless logged_in?
         @list = List.find_by_id(params[:id])
         erb :'lists/edit'
     end
 
     patch '/lists/:id' do  
-        #binding.pry
         redirect '/login' unless logged_in?
         list = List.find_by_id(params[:id])
         if list.user == current_user
@@ -59,6 +61,7 @@ class ListsController < ApplicationController
             # end   
             redirect "/lists"
         else
+            flash[:message] = "You need to be the Creator of this List to edit it"
             redirect "/lists/#{list.id}"
         end
     end
@@ -71,6 +74,7 @@ class ListsController < ApplicationController
             list.delete
             redirect '/lists'
         else
+            flash[:message] = "You need to be the Creator of this List to delete it"
             redirect '/lists'
         end
     end

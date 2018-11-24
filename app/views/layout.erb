@@ -17,7 +17,7 @@
         $("#add").click(function(e){
           $(".items").append('<div>List Item: <input type="text" name="list[list_items][][item]">' + '<input type="button" value="delete" id="delete"></div>')
         });
-        $(".item").on("click", "#delete", function(e){
+        $(".items").on("click", "#delete", function(e){
           e.preventDefault(); $(this).parent('div').remove();
         });
       });
