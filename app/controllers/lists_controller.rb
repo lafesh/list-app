@@ -35,7 +35,6 @@ class ListsController < ApplicationController
     get '/lists/:id' do
         redirect '/login' unless logged_in?
         @list = List.find_by_id(params[:id])
-        #binding.pry
         erb :'lists/show'
     end
 
