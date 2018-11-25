@@ -10,7 +10,7 @@
 <ul>
     <% @list.list_items.each do |list| %>
         <li><%= list.item %></li>
-    <% end %>
+    <% end.reverse %>
 </ul><br>
 
 List created on <%= @list.created_at.strftime("%A, %b %d, %Y") %> <br>
