@@ -22,7 +22,7 @@ class ListsController < ApplicationController
                 list.list_items.build(item)
                 list.save
             end   
-            redirect '/lists'
+            redirect "/lists/#{list.id}"
         end
     end
 
@@ -44,7 +44,7 @@ class ListsController < ApplicationController
         erb :'lists/edit'
     end
 
-    patch '/lists/:id' do  
+    patch '/lists/:id' do  #need to figure out a way to update not delete list items
         redirect '/login' unless logged_in?
         list = List.find_by_id(params[:id])
         if list.user == current_user
