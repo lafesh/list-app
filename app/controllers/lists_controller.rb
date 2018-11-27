@@ -35,6 +35,7 @@ class ListsController < ApplicationController
     get '/lists/:id' do
         redirect '/login' unless logged_in?
         @list = List.find_by_id(params[:id])
+        #binding.pry
         erb :'lists/show'
     end
 
@@ -50,10 +51,13 @@ class ListsController < ApplicationController
         if list.user == current_user
             list.update(list_title: params[:list][:list_title])
             list.save
+            #binding.pry
             list.list_items.each {|item| item.delete}
             params[:list][:list_items].each do |item|
                 list.list_items.build(item)
                 list.save
+                # i = list.list_items.find_by_id(params[:list][:id])
+                # i.update(item)
             end   
             # list.list_items.each do |item|
             #     item.update(item: params[:list_items][:item]) need to iterate through each item somehow
