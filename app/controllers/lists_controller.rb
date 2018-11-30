@@ -2,7 +2,7 @@ class ListsController < ApplicationController
     get '/lists' do
         redirect '/login' unless logged_in?
         @user = current_user
-        erb :'lists/homepage'
+        erb :'lists/index'
     end
     
     get '/lists/new' do
@@ -17,11 +17,10 @@ class ListsController < ApplicationController
         else
             user = current_user
             list = user.lists.create(list_title: params[:list][:list_title])
-            list.save
             params[:list][:list_items].each do |item|
-                list.list_items.build(item)
-                list.save
+                list.list_items.create(item)
             end   
+            list.list_items.each {|i| i.created_at = list.created_at}
             redirect "/lists/#{list.id}"
         end
     end
@@ -31,11 +30,16 @@ class ListsController < ApplicationController
         @lists = List.all     
         erb :'lists/all'
     end 
+    
+    post '/lists/search' do
+        @lists = List.all.select {|list| list.user.first_name.include?(params[:query])}
+        erb :'lists/all'
+    end
 
     get '/lists/:id' do
         redirect '/login' unless logged_in?
         @list = List.find_by_id(params[:id])
-        #binding.pry
+        
         erb :'lists/show'
     end
 
@@ -45,24 +49,22 @@ class ListsController < ApplicationController
         erb :'lists/edit'
     end
 
-    patch '/lists/:id' do  #need to figure out a way to update not delete list items
+    patch '/lists/:id' do 
         redirect '/login' unless logged_in?
         list = List.find_by_id(params[:id])
         if list.user == current_user
             list.update(list_title: params[:list][:list_title])
             list.save
-            #binding.pry
-            list.list_items.each {|item| item.delete}
-            params[:list][:list_items].each do |item|
-                list.list_items.build(item)
-                list.save
-                # i = list.list_items.find_by_id(params[:list][:id])
-                # i.update(item)
+
+            if list.list_items.length < params[:list][:list_items].length
+                params[:list][:list_items][list.list_items.length..params[:list][:list_items].length].each do |item|
+                    list.list_items.create(item)
+                end
+            end
+
+            params[:list][:list_items].each_with_index do |item, i|
+                list.list_items[i].update(item)
             end   
-            # list.list_items.each do |item|
-            #     item.update(item: params[:list_items][:item]) need to iterate through each item somehow
-            #     list.save
-            # end   
             redirect "/lists/#{list.id}"
         else
             flash[:message] = "You need to be the Creator of this List to edit it"

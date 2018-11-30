@@ -38,8 +38,4 @@ class UsersController < ApplicationController
         flash[:message] = "Thank you for visiting My Lists. Have a wonderful day!"
         redirect '/'     
     end
-    
-    get '/settings' do
-        erb :'users/settings'
-    end
 end

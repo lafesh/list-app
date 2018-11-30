@@ -2,7 +2,6 @@
     <a href="/lists">My Lists</a>
     <a href="/lists/new">Create New List</a>
     <a href="/lists/all">All Lists</a>
-    <a href="/settings">Settings</a>
     <a href="/logout">Logout</a>
 </div>
 
@@ -18,8 +17,8 @@ List created on <%= @list.created_at.strftime("%A, %b %d, %Y") %> <br>
     List Title updated on <%= @list.updated_at.strftime("%A, %b %d, %Y") %><br>
 <% end %>
 
-<% if i = @list.list_items.find {|item|@list.created_at != item.created_at} %>
-    List Items updated on <%= i.created_at.strftime("%A, %b %d, %Y") %><br>
+<% if i = @list.list_items.find {|item| item.created_at != item.updated_at} %>
+    List Items updated on <%= i.updated_at.strftime("%A, %b %d, %Y") %><br>
 <% end %>
 
 <br><a href="/lists/<%= @list.id %>/edit"><button class="button">Edit List</button></a>

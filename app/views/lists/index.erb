@@ -2,7 +2,6 @@
     <a class="active" href="/lists">My Lists</a>
     <a href="/lists/new">Create New List</a>
     <a href="/lists/all">All Lists</a>
-    <a href="/settings">Settings</a>
     <a href="/logout">Logout</a>
 </div>
 
@@ -10,6 +9,7 @@
 
 <% @user.lists.each do |list| %>
     <h3><a href="/lists/<%= list.id %>"><%= list.list_title %></a></h3>
+    <p>Created on <%= list.created_at.strftime("%A, %b %d, %Y") %></p> 
     
     <a href="/lists/<%= list.id %>/edit"><button class="button"> Edit List </button></a>
 
