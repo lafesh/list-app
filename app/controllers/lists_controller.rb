@@ -10,7 +10,7 @@ class ListsController < ApplicationController
         erb :'lists/new'
     end
 
-    post '/lists' do #make this less complicated 
+    post '/lists' do
         if params[:list][:list_title].empty? || params[:list][:list_items].empty?
             flash[:message] = "Please fill out all the fields available."
             redirect '/lists/new'
