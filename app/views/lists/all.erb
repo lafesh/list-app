@@ -8,15 +8,15 @@
 <h2>Here are all the lists currently available</h2>
 
 <form action="/lists/search" method="post">
-    <input type="text" name="query">
-    <input type="submit" value="Search">
+    <input type="text" name="query" placeholder="type in a user name">
+    <a class="waves-effect waves-light btn-small orange"><input type="submit" value="Search"></a>
 </form>
 
 <% @lists.reverse.each do |list| %>
     <% if list.user == current_user %>
-        <h3><a href="/lists/<%= list.id %>"><%= list.list_title %></a> by <%= list.user.first_name.capitalize %></h3>
+        <h3 class="list"><a href="/lists/<%= list.id %>"><%= list.list_title %></a> by <%= list.user.first_name.capitalize %></h3>
     <% else %>
-        <h3><%= list.list_title %> by <%= list.user.first_name.capitalize %></h3>
+        <h3 class="list"><%= list.list_title %> by <%= list.user.first_name.capitalize %></h3>
     <% end %>
     <p>Created on <%= list.created_at.strftime("%A, %b %d, %Y") %></p> 
     <ul>

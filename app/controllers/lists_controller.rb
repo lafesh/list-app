@@ -1,3 +1,5 @@
+require 'pry'
+
 class ListsController < ApplicationController
     get '/lists' do
         redirect '/login' unless logged_in?
@@ -32,7 +34,9 @@ class ListsController < ApplicationController
     end 
     
     post '/lists/search' do
+        binding.pry
         @lists = List.all.select {|list| list.user.first_name.include?(params[:query])}
+        
         erb :'lists/all'
     end
 

@@ -21,8 +21,8 @@ List created on <%= @list.created_at.strftime("%A, %b %d, %Y") %> <br>
     List Items updated on <%= i.updated_at.strftime("%A, %b %d, %Y") %><br>
 <% end %>
 
-<br><a href="/lists/<%= @list.id %>/edit"><button class="button">Edit List</button></a>
+<br><a href="/lists/<%= @list.id  %>/edit" class="waves-effect waves-light btn-small orange black-text">Edit List</a><br><br>
 <form action="/lists/<%= @list.id %>/delete" method="post">
     <input type="hidden" id="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete List" id="delete">
+    <a class="waves-effect waves-light btn-small orange"><input type="submit" value="Delete List" id="effect"></a>
 </form>

@@ -11,11 +11,11 @@
     <h3><a href="/lists/<%= list.id %>"><%= list.list_title %></a></h3>
     <p>Created on <%= list.created_at.strftime("%A, %b %d, %Y") %></p> 
     
-    <a href="/lists/<%= list.id %>/edit"><button class="button"> Edit List </button></a>
+    <a href="/lists/<%= list.id %>/edit" class="waves-effect waves-light btn-small orange black-text"> Edit List </a> <br><br>
 
     <form action="/lists/<%= list.id %>/delete" method="post">
         <input type="hidden" id="hidden" name="_method" value="delete">
-        <input type="submit" value="Delete List" id="delete">
+        <a class="waves-effect waves-light btn-small orange"><input type="submit" value="Delete List"></a>
     </form>
 <% end %>
 

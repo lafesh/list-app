@@ -12,9 +12,9 @@
     List Title: <input type="text" name="list[list_title]" value="<%= @list.list_title %>">
     <div class="items">
     <% @list.list_items.each do |list| %>
-        <div class="item"> List Item: <input type="text" name="list[list_items][][item]" value="<%= list.item %>"> <input type="button" value="delete" id="delete"><br></div>
+        <div class="item"> List Item: <input type="text" name="list[list_items][][item]" value="<%= list.item %>"><a class="waves-effect waves-light btn-small orange"> <input type="button" value="delete" id="effect"></a><br><br></div>
     <% end %>
     </div>
-    <input type="button" value=" Add List Item " id="add">
-    <input type="submit" value=" Update List ">
+    <a class="waves-effect waves-light btn-small orange"><input type="button" value=" Add List Item " id="add"></a>
+    <a class="waves-effect waves-light btn-small orange"><input type="submit" value=" Update List "></a>
 </form>
